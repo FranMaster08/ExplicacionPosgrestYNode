@@ -1,20 +1,8 @@
 const express = require ('express');
+const controller=require('../controller/user.controller')
 const route = express.Router();
-const db = require('../db/conexionDB')
-
-route.get('/', (req,res)=>{
-    db.connect()
-    db.query('SELECT * from tblprueba', (err, rsp) => {
-        if (err) {
-          res.status(400).json({mensaje:'hola esto es un error'})
-        } else {
-            res.status(200).json({data:rsp.rows})
-        }
-      })
-      
-})
-
-
-
+route.get('/',controller.TraerUsuarios )
+route.get('/:id',controller.BuscarUnUser )
+route.post('/',controller.InsertarUser )
 module.exports = route
 
